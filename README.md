@@ -126,7 +126,11 @@ npm run build
 
 ## Deploy
 
-This is a static Vite application. It can be deployed to GitHub Pages, Vercel, Netlify, Cloudflare Pages, or any static host.
+This repository includes a GitHub Actions workflow for GitHub Pages. After the `main` branch workflow finishes, the live app is available at:
+
+<https://hugueninfer.github.io/smart-waste-ai/>
+
+The app uses hash-based routes on GitHub Pages so Dashboard, Scanner, History, and About remain directly navigable on a static host.
 
 ```bash
 npm run build
