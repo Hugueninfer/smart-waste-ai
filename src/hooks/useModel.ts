@@ -1,0 +1,5 @@
+import { useCallback, useEffect, useState } from 'react'
+import { loadModel, predict, resetModel } from '../services/modelService'
+import type { Prediction } from '../types/prediction'
+import type { ModelStatus } from '../types/waste'
+export function useModel() { const [status, setStatus] = useState<ModelStatus>('idle'); const [error, setError] = useState<Error | null>(null); useEffect(() => { let alive = true; setStatus('loading'); loadModel().then(() => alive && setStatus('ready')).catch((cause: Error) => { if (alive) { setError(cause); setStatus('error') } }); return () => { alive = false } }, []); const classify = useCallback(async (input: HTMLImageElement | HTMLVideoElement | HTMLCanvasElement): Promise<Prediction[]> => { setError(null); return predict(input) }, []); const retry = useCallback(() => { resetModel(); setError(null); setStatus('loading'); loadModel().then(() => setStatus('ready')).catch((cause: Error) => { setError(cause); setStatus('error') }) }, []); return { status, error, classify, retry } }

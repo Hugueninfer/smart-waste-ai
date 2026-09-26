@@ -1,0 +1,8 @@
+import { LayoutDashboard, ScanLine, History, Info, Recycle } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
+import { useLanguage } from '../../contexts/LanguageContext'
+import { LanguageSwitcher } from './LanguageSwitcher'
+import type { ModelStatus } from '../../types/waste'
+import { ModelStatusBadge } from '../common/ModelStatusBadge'
+const links = [{ to: '/', key: 'dashboard' as const, icon: LayoutDashboard }, { to: '/scanner', key: 'scanner' as const, icon: ScanLine }, { to: '/history', key: 'history' as const, icon: History }, { to: '/about', key: 'about' as const, icon: Info }]
+export function MobileNav({ status }: { status: ModelStatus }) { const { t } = useLanguage(); return <><header className="flex items-center justify-between bg-[#062923] px-4 py-4 text-white lg:hidden"><div className="flex items-center gap-2"><div className="grid size-9 place-items-center rounded-xl bg-[#b8f34a] text-[#062923]"><Recycle size={20}/></div><span className="display font-bold">Smart Waste AI</span></div><div className="flex items-center gap-3"><ModelStatusBadge status={status}/><LanguageSwitcher/></div></header><nav className="fixed inset-x-3 bottom-3 z-30 flex justify-around rounded-2xl border border-white/10 bg-[#062923]/95 p-2 shadow-2xl backdrop-blur lg:hidden">{links.map(({ to, key, icon: Icon }) => <NavLink end={to === '/'} key={to} to={to} className={({ isActive }) => `flex min-w-16 flex-col items-center gap-1 rounded-xl px-2 py-2 text-[10px] font-bold ${isActive ? 'bg-[#b8f34a] text-[#062923]' : 'text-white/60'}`}><Icon size={17}/>{t(key)}</NavLink>)}</nav></> }

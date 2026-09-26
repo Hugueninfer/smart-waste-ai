@@ -1,0 +1,3 @@
+import { AlertTriangle } from 'lucide-react'
+import { useLanguage } from '../../contexts/LanguageContext'
+export function ModelUnavailable({ onRetry }: { onRetry: () => void }) { const { t } = useLanguage(); return <div className="flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50 p-4 text-red-950"><AlertTriangle className="mt-0.5 shrink-0 text-red-500" size={20}/><div className="flex-1"><strong className="block text-sm">{t('modelUnavailable')}</strong><p className="mt-1 text-xs leading-relaxed text-red-900/70">{t('modelUnavailableHelp')}</p><button onClick={onRetry} className="mt-3 rounded-lg bg-red-900 px-3 py-2 text-xs font-bold text-white">{t('retry')}</button></div></div> }

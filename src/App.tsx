@@ -1,0 +1,10 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { LanguageProvider } from './contexts/LanguageContext'
+import { HistoryProvider } from './contexts/HistoryContext'
+import { ModelProvider } from './contexts/ModelContext'
+import { AppLayout } from './components/layout/AppLayout'
+import { Dashboard } from './pages/Dashboard'
+import { Scanner } from './pages/Scanner'
+import { History } from './pages/History'
+import { About } from './pages/About'
+export default function App() { return <LanguageProvider><HistoryProvider><ModelProvider><BrowserRouter><Routes><Route element={<AppLayout/>}><Route path="/" element={<Dashboard/>}/><Route path="/scanner" element={<Scanner/>}/><Route path="/history" element={<History/>}/><Route path="/about" element={<About/>}/></Route></Routes></BrowserRouter></ModelProvider></HistoryProvider></LanguageProvider> }
